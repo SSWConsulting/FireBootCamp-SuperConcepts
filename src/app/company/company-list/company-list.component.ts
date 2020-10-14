@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
 import { Subscription, Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-company-list',

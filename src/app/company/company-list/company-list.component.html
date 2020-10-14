@@ -1,23 +1,28 @@
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>&nbsp;</th>
-  </tr>
-</thead>
-<tbody>
-<tr *ngFor="let company of companies | async">
-    <td>{{company.name}}</td>
-    <td>{{company.email}}</td>
-    <td>{{company.phone}}</td>
-    <td class="company-buttons">
-      <button class="btn btn-primary">Edit</button>
-      <button class="btn btn-danger">Delete</button>
-   </td>
- </tr>
-</tbody>
-</table>
+<div *ngIf="!(companies | async)"> loading.... </div>
+
+<div *ngIf="companies | async as companyList">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let company of companyList">
+      <td>{{company.name}}</td>
+      <td>{{company.email}}</td>
+      <td>{{company.phone}}</td>
+      <td class="company-buttons">
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+     </td>
+   </tr>
+  </tbody>
+  </table>
+</div>
+
 
