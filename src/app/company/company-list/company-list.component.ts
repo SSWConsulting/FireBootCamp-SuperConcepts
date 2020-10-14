@@ -22,9 +22,20 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     this.componentExists = false;
   }
 
-
   ngOnInit(): void {
+    this.loadCompanies();
+  }
+
+  loadCompanies(): void {
     this.companies = this.companyService.getCompanies();
   }
+
+
+  deleteCompany(company: Company): void {
+    console.log('component caling delete');
+    this.companyService.deleteCompany(company)
+    .subscribe(deleted => this.loadCompanies());
+  }
+
 
 }

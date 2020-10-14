@@ -24,11 +24,19 @@ export class CompanyService {
   }
 
 
+  deleteCompany(company: Company): Observable<Company> {
+    console.log('service calling delete');
+    return this.httpClient.delete<Company>(`${this.API_BASE}/company/${company.id}`);
+  }
+
 
   private errorHandler(error: Error): Observable<Company[]>
   {
     console.error('ERROR CAUGHT BY SERVICE', error);
     return new Observable<Company[]>();
   }
+
+
+
 
 }
