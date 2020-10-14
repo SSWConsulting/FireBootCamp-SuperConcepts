@@ -7,12 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
+import { CompaniesTableComponent } from './company/companies-table/companies-table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    CompaniesTableComponent
   ],
   imports: [
     BrowserModule,
