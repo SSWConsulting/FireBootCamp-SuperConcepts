@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewRef } from '@angular/core';
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
 import { Subscription, Observable } from 'rxjs';
-import { takeWhile, delay } from 'rxjs/operators';
+import { takeWhile, delay, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-company-list',
@@ -14,6 +14,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   componentExists = true;
 
   companies: Observable<Company[]>;
+
+
 
   constructor(private companyService: CompanyService ) {
   }

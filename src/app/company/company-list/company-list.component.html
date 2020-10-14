@@ -4,10 +4,11 @@
 </div>
 
 
-<div *ngIf="!(companies | async)"> loading.... </div>
 
-<div *ngIf="companies | async as companyList">
+<div *ngIf="companies | async as companyList else loading">
     <app-companies-table [companies]="companyList" (deleteClicked)="deleteCompany($event)"></app-companies-table>
 </div>
+
+<div #loading>  loading.... </div>
 
 
