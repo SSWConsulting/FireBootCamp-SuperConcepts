@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'crm';
+
+  name = 'Super Concepts';
+
+  keyPressed(e): void {
+    this.name = e.target.value;
+  }
+
 }
