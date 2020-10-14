@@ -10,8 +10,8 @@ export class AppComponent {
 
   name = 'Super Concepts';
 
-  keyPressed(e): void {
-    this.name = e.target.value;
-  }
+  // keyPressed(e): void {
+  //   this.name = e.target.value;
+  // }
 
 }
