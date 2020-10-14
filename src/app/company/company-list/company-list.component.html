@@ -1,4 +1,9 @@
 
+<div class="text-right">
+  <a class="btn btn-success" [routerLink]="['/company', 'new']">Add Company</a>
+</div>
+
+
 <div *ngIf="!(companies | async)"> loading.... </div>
 
 <div *ngIf="companies | async as companyList">
