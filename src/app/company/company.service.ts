@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Company } from './company';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -30,10 +30,17 @@ export class CompanyService {
   }
 
 
-  private errorHandler(error: Error): Observable<Company[]>
+  addCompany(company: Company): Observable<Company> {
+    return this.httpClient.post<Company>(
+      `${this.API_BASE}/company`, company, { headers: new HttpHeaders().set('content-type', 'application/json') }
+    ).pipe(catchError(this.errorHandler));
+  }
+
+
+  private errorHandler(error: Error): Observable<any>
   {
     console.error('ERROR CAUGHT BY SERVICE', error);
-    return new Observable<Company[]>();
+    return of({});
   }
 
 
