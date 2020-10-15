@@ -30,11 +30,20 @@ export class CompanyEditComponent implements OnInit {
     this.buildForm();
 
     if (!this.isNewCompany) {
-      // todo load existing company
       this.companyId = this.activatedRoute.snapshot.params.id;
       this.companyService.getCompany(this.companyId)
       .subscribe(c => this.companyForm.patchValue(c));
     }
+
+    this.companyForm.get('checkPhone').valueChanges
+    .subscribe(checkVal => {
+      if (checkVal){
+        this.companyForm.get('phone').setValidators(Validators.required);
+      } else {
+        this.companyForm.get('phone').clearValidators();
+      }
+      this.companyForm.get('phone').updateValueAndValidity();
+    });
 
   }
 
@@ -42,7 +51,8 @@ export class CompanyEditComponent implements OnInit {
     this.companyForm = this.fb.group({
       name: ['', Validators.required],
       phone: [''],
-      email: ['test@test.com']
+      email: ['test@test.com'],
+      checkPhone: []
     });
   }
 
