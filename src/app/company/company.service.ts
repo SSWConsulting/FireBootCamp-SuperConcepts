@@ -3,6 +3,9 @@ import { Company } from './company';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/appState';
+import { LOAD_COMPANIES_SUCCESS } from '../state/companies/companyReducer';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +15,13 @@ export class CompanyService {
   API_BASE = 'https://firebootcamp-crm-api.azurewebsites.net/api';
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private store: Store<AppState>,
   ) {
+
     this.loadCompanies();
   }
 
-  companies$: BehaviorSubject<Company[]> = new BehaviorSubject<Company[]>([]);
 
 
   loadCompanies(): void {
@@ -25,11 +29,11 @@ export class CompanyService {
     .pipe(
       catchError(this.errorHandler),
       tap(x => console.log('GOT COMPANIES', x))
-    ).subscribe(c => this.companies$.next(c));
+    ).subscribe(c => this.store.dispatch({type: LOAD_COMPANIES_SUCCESS, payload: c}));
   }
 
   getCompanies(): Observable<Company[]> {
-    return this.companies$;
+    return this.store.select(s => s.companies);
   }
 
 

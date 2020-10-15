@@ -9,6 +9,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import { CompaniesTableComponent } from './company/companies-table/companies-table.component';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+import { StoreModule } from '@ngrx/store';
+import { companyReducer } from './state/companies/companyReducer';
+
 
 
 @NgModule({
@@ -24,7 +27,8 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot( {companies: companyReducer} )
   ],
   providers: [],
   bootstrap: [AppComponent]
