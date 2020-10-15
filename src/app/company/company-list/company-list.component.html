@@ -5,7 +5,7 @@
 
 
 
-<div *ngIf="companies | async as companyList else loading">
+<div *ngIf="companies$ | async as companyList else loading">
     <app-companies-table [companies]="companyList" (deleteClicked)="deleteCompany($event)"></app-companies-table>
 </div>
 

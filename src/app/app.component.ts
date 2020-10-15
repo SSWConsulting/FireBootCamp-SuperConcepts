@@ -1,17 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CompileShallowModuleMetadata } from '@angular/compiler';
+import { CompanyService } from './company/company.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  constructor(private companyService: CompanyService) {
+  }
+
+  companyCount: Observable<number>;
   name = 'Super Concepts';
 
-  // keyPressed(e): void {
-  //   this.name = e.target.value;
-  // }
+
+  ngOnInit(): void {
+    this.companyCount = this.companyService.getCompanies().pipe(map(l => l.length));
+  }
+
+
+
 
 }

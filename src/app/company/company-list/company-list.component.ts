@@ -13,8 +13,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
 
   componentExists = true;
 
-  companies: Observable<Company[]>;
-
+  companies$: Observable<Company[]>;
 
 
   constructor(private companyService: CompanyService ) {
@@ -29,14 +28,13 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   loadCompanies(): void {
-    this.companies = this.companyService.getCompanies();
+    this.companies$ = this.companyService.getCompanies();
   }
 
 
   deleteCompany(company: Company): void {
     console.log('component caling delete');
-    this.companyService.deleteCompany(company)
-    .subscribe(deleted => this.loadCompanies());
+    this.companyService.deleteCompany(company);
   }
 
 
