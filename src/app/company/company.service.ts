@@ -39,14 +39,12 @@ export class CompanyService {
     .subscribe(d => this.loadCompanies());
   }
 
-
   addCompany(company: Company): void{
     this.httpClient.post<Company>(
       `${this.API_BASE}/company`, company, { headers: new HttpHeaders().set('content-type', 'application/json') }
     ).pipe(catchError(this.errorHandler))
     .subscribe(a => this.loadCompanies());
   }
-
 
   getCompany(companyId: number): Observable<Company> {
     return this.httpClient.get<Company>(`${this.API_BASE}/company/${companyId}`)
