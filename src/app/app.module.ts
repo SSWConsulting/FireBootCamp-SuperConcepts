@@ -11,7 +11,7 @@ import { CompaniesTableComponent } from './company/companies-table/companies-tab
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { StoreModule } from '@ngrx/store';
 import { companyReducer } from './state/companies/companyReducer';
-
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -28,7 +28,10 @@ import { companyReducer } from './state/companies/companyReducer';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
-    StoreModule.forRoot( {companies: companyReducer} )
+    StoreModule.forRoot( {companies: companyReducer} ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 100
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

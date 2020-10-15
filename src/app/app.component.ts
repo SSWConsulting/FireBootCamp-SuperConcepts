@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyCount$ = this.companyService.getCompanies().pipe(
-      filter(x => x !== null),
+      filter(x => x != null),
       tap(x => console.log('app component get compaines' + x)),
       map(l => l.length),
       tap(x => console.log('recalculated count to ' + x))
