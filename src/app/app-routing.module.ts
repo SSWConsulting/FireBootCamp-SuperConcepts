@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'company/list', pathMatch: 'full' },
   { path: 'company/list', component: CompanyListComponent },
   { path: 'company/new', component: CompanyEditComponent },
+  { path: 'company/edit/:id', component: CompanyEditComponent }
 ];
 
 @NgModule({
