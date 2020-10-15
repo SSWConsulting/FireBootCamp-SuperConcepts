@@ -16,24 +16,27 @@ export class CompanyService {
 
   constructor(
     private httpClient: HttpClient,
-    private store: Store<AppState>,
+    // private store: Store<AppState>,
   ) {
 
     this.loadCompanies();
   }
 
-
+  companies$ = new BehaviorSubject<Company[]> ([]);
 
   loadCompanies(): void {
     this.httpClient.get<Company[]>(`${this.API_BASE}/company`)
     .pipe(
       catchError(this.errorHandler),
       tap(x => console.log('GOT COMPANIES', x))
-    ).subscribe(c => this.store.dispatch({type: LOAD_COMPANIES_SUCCESS, payload: c}));
+    )
+    .subscribe(c => this.companies$.next(c));
+    // .subscribe(c => this.store.dispatch({type: LOAD_COMPANIES_SUCCESS, payload: c}));
   }
 
   getCompanies(): Observable<Company[]> {
-    return this.store.select(s => s.companies);
+    return this.companies$.asObservable();
+    // eturn this.store.select(s => s.companies);
   }
 
 
