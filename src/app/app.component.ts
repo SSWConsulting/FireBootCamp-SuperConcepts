@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { CompanyService } from './company/company.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +14,15 @@ export class AppComponent implements OnInit {
   constructor(private companyService: CompanyService) {
   }
 
-  companyCount: Observable<number>;
+  companyCount$: Observable<number>;
   name = 'Super Concepts';
 
 
   ngOnInit(): void {
-    this.companyCount = this.companyService.getCompanies().pipe(map(l => l.length));
+    this.companyCount$ = this.companyService.getCompanies().pipe(
+      map(l => l.length),
+      tap(x => console.log('recalculated count to ' + x))
+    );
   }
 
 
